@@ -22,6 +22,8 @@ export class AuthService {
       await user.save();
 
       // Generar JWT
+      const token = await JwtAdapter.generateToken({ id: user.id });
+      if ( !token ) throw CustomError.internalServer('Error while creating JWT');
 
       // Email de confirmacion
 
@@ -29,7 +31,7 @@ export class AuthService {
 
       return { 
         user: userEntity,
-        token: 'ABC-123'
+        token
       }
     } catch (error) {
       throw CustomError.internalServer(`${ error }`);
