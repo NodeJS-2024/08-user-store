@@ -1,5 +1,9 @@
 import jwt from 'jsonwebtoken';
 
+import { envs } from './envs';
+
+const JWT_SEED = envs.JWT_SEED;
+
 export class JwtAdapter {
 
   static async generateToken(payload: any, duration: string = '2h') {
@@ -8,7 +12,7 @@ export class JwtAdapter {
 
     return new Promise((resolve, reject) => {
 
-      jwt.sign(payload, "SEED", { expiresIn: duration }, (err, token) => {
+      jwt.sign(payload, JWT_SEED, { expiresIn: duration }, (err, token) => {
 
         if ( err) return resolve(null);
 
