@@ -11,4 +11,5 @@ Cada paso de su configuración ya se ha realizado previamente en el curso, por l
 2. Ejecutar `npm install` para instalar las dependencias
 3. En caso de necesitar base de datos, configurar el docker-compose.yml y ejecutar `docker-compose up -d` para levantar los servicios deseados.
 4. Ejecutar `npm run dev` para levantar el proyecto en modo desarrollo
-
+5. Generar el password de nodemailer en: `https://myaccount.google.com/u/0/apppasswords?pli=1&rapt=AEjHL4NrecPVJVzHW2f0IyYdm0YyG3vhGmSim9OTNJDSbxkR2X9lF6PwQAH5EJULlnEBlt1Iyn5g1jO7WV8Fhitjle3T4As_NlSq2CRQIfQqARNkeUajEr8`
+6. Tener el dominio como `gmail` y la doble verificacion en el email
