@@ -28,7 +28,6 @@ export class ProductService {
     
     try {
 
-
       const [ total, products ] = await Promise.all([
         ProductModel.countDocuments(),
         ProductModel.find()
