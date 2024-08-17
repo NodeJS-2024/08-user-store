@@ -31,8 +31,12 @@ export class ProductService {
 
       const [ total, products ] = await Promise.all([
         ProductModel.countDocuments(),
-        ProductModel.find().skip((page - 1) * limit).limit(limit),
-        // populate
+        ProductModel.find()
+                    .skip((page - 1) * limit)
+                    .limit(limit)
+                    // .populate('user', 'name email'),
+                    .populate('user')
+                    .populate('category'),
       ]);
 
       return {
