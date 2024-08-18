@@ -1,14 +1,13 @@
 import { Router } from 'express';
 import { FileUploadController } from './controller';
+import { FileUploadService } from '../services/file-upload.service';
 
 export class FileUploadRoutes {
 
   static get routes(): Router {
 
     const router = Router();
-    const controller = new FileUploadController(
-      // new FileUploadService()
-    );
+    const controller = new FileUploadController(new FileUploadService());
 
     // router.use( FileUploadMiddleware.containFiles );
     // router.use( TypeMiddleware.validTypes(['users','products','categories']) );

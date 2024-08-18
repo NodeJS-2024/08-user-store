@@ -1,11 +1,13 @@
 import { Response, Request } from 'express';
 import { CustomError } from '../../domain';
+import { FileUploadService } from '../services/file-upload.service';
+import { UploadedFile } from 'express-fileupload';
 
 export class FileUploadController {
 
   // DI
   constructor(
-    // private readonly fileUploadService: FileUploadService,
+    private readonly fileUploadService: FileUploadService,
   ) { }
 
   private handleError = ( error: unknown, res: Response ) => {
@@ -17,21 +19,24 @@ export class FileUploadController {
     return res.status( 500 ).json( { error: 'Internal server error' } );
   };
 
-  uploadFile = ( req: Request, res: Response ) => {
+  uploadFile = (req: Request, res: Response) => {
 
-    const type = req.params.type;
-    // const file = req.body.files.at(0) as UploadedFile;
+    //const type = req.params.type;
+    const files = req.files; //.at(0) as UploadedFile;
 
-    
-    // this.fileUploadService.uploadSingle( file, `uploads/${ type }` )
-    //   .then( uploaded => res.json(uploaded) )
-    //   .catch(  error => this.handleError( error, res ) )
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ error: 'No files were selected' });
+    }
 
-    res.json('uploadFile');
+    const file = req.files.file as UploadedFile;
+
+    this.fileUploadService.uploadSingle(file)
+      .then(uploaded => res.json(uploaded))
+      .catch(error => this.handleError( error, res ));
 
   };
   
-  uploadMultileFiles = ( req: Request, res: Response ) => {
+  uploadMultileFiles = (req: Request, res: Response) => {
 
     const type = req.params.type;
     // const files = req.body.files as UploadedFile[];
